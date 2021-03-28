@@ -131,3 +131,57 @@ For mapping volumes i.e. having persistent container data, follow these steps.
         container/persistence/postgres
 
     2) Uncomment the volumes section under postgres
+
+## Swagger UI - API Demo - Screenshots
+
+![Screenshot 2021-03-28 at 6 56 58 PM](https://user-images.githubusercontent.com/24351133/112754111-4cea0a80-8ff8-11eb-8dd9-0d95038b7311.png)
+
+### Create a product entry
+
+#### Request
+
+![Screenshot 2021-03-28 at 6 57 21 PM](https://user-images.githubusercontent.com/24351133/112754121-58d5cc80-8ff8-11eb-9927-fa5ed9836ad4.png)
+
+#### Response
+
+![Screenshot 2021-03-28 at 6 57 36 PM](https://user-images.githubusercontent.com/24351133/112754127-5e331700-8ff8-11eb-9c54-13de320133c3.png)
+
+### Get All Products
+
+#### Request
+
+![Screenshot 2021-03-28 at 6 57 58 PM](https://user-images.githubusercontent.com/24351133/112754144-75720480-8ff8-11eb-935f-99ed70357417.png)
+
+#### Response
+
+![Screenshot 2021-03-28 at 6 58 15 PM](https://user-images.githubusercontent.com/24351133/112754149-7c007c00-8ff8-11eb-97de-8614e5988f58.png)
+
+### Update a product entry
+
+#### Request
+
+![Screenshot 2021-03-28 at 6 58 46 PM](https://user-images.githubusercontent.com/24351133/112754162-8753a780-8ff8-11eb-87a2-561a37942b67.png)
+
+#### Response
+
+![Screenshot 2021-03-28 at 6 59 12 PM](https://user-images.githubusercontent.com/24351133/112754172-8de21f00-8ff8-11eb-9001-e0e10e4003bd.png)
+
+### Get a specific product entry
+
+#### Request
+
+![Screenshot 2021-03-28 at 6 59 34 PM](https://user-images.githubusercontent.com/24351133/112754195-9f2b2b80-8ff8-11eb-92a0-6c3d71a0276b.png)
+
+#### Response
+
+![Screenshot 2021-03-28 at 6 59 47 PM](https://user-images.githubusercontent.com/24351133/112754203-a5210c80-8ff8-11eb-91ef-6e3229b70db1.png)
+
+### Delete a product entry
+
+#### Request
+
+![Screenshot 2021-03-28 at 7 00 15 PM](https://user-images.githubusercontent.com/24351133/112754222-b1a56500-8ff8-11eb-88f3-96f6209553aa.png)
+
+#### Response
+
+![Screenshot 2021-03-28 at 7 00 27 PM](https://user-images.githubusercontent.com/24351133/112754226-b833dc80-8ff8-11eb-87c7-dfc33efb1a1b.png)
