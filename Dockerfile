@@ -1,20 +1,4 @@
-FROM maven:3.6.3-jdk-8 as builder
-
-# Setting JAVA_HOME for performing Maven build.
-ENV JAVA_HOME /usr/local/openjdk-8
-ENV PATH="${JAVA_HOME}/bin:${PATH}"
-
-# Creating base directory
-RUN mkdir /tmp/catalog
-
-COPY pom.xml /tmp/catalog/
-COPY src /tmp/catalog/src
-
-# Building the executable.
-RUN cd /tmp/catalog \
-  && mvn clean install -Dmaven.test.skip=true -q
-
-FROM openjdk:8-jdk as server
+FROM openjdk:8-jdk
 
 ENV DEBIAN_FRONT_END noninteractive
 
@@ -34,10 +18,10 @@ USER root
 
 # Installing all the base necessary packages for execution of embedded MariaDB4j i.e. Open SSL, libaio & libncurses5
 RUN apt-get -y -qq update --ignore-missing --fix-missing \
-  && apt-get -y -qq install libaio1 libaio-dev libncurses5 openssl sudo
+  && apt-get -y -qq install sudo
 
 # Creating necessary directory structures to host the platform
-RUN mkdir /appln /appln/bin /appln/bin/catalog /appln/scripts /appln/tmp /appln/tmp/catalog
+RUN mkdir /appln /appln/bin /appln/bin/catalog /appln/scripts
 
 # Creating a dedicated user catalog
 RUN groupadd -g 999 catalog \
@@ -56,7 +40,7 @@ RUN chown -R catalog:catalog /appln
 USER catalog
 
 # Moving the executable / build to the run location
-COPY --from=builder /tmp/catalog/target/catalog*.jar /appln/bin/catalog/
+COPY target/catalog-0.0.1-SNAPSHOT.jar /appln/bin/catalog/catalog-0.0.1-SNAPSHOT.jar
 
 # Creating the startup script, by passing the env variables to run the jar. Logs are written directly to continer logs.
 RUN echo "#!/bin/bash" > /appln/scripts/startup.sh \

@@ -24,7 +24,7 @@
 		<logbook.version>1.7.1</logbook.version>
 		<openapi-ui.version>1.2.32</openapi-ui.version>
 		<lombok.version>1.16.20</lombok.version>
-		<jacoco.version>0.8.5</jacoco.version>
+		<jacoco.version>0.8.4</jacoco.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -92,10 +92,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<!--suppress UnresolvedMavenProperty -->
-					<jvmArguments>${argLine}</jvmArguments>
 					<wait>1000</wait>
 					<maxAttempts>180</maxAttempts>
+					<!--suppress UnresolvedMavenProperty -->
+					<jvmArguments>${argLine}</jvmArguments>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -141,31 +141,18 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
-						<id>default-prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>default-report</id>
-						<phase>verify</phase>
+						<id>report</id>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>

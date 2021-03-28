@@ -42,6 +42,16 @@ The idea is to build a single production grade Spring Boot Jar with the followin
 		
 	The maven build should place the catalog-${CATALOG_VERSION}.jar inside the target folder.
 
+### Build Docker Image
+
+After Maven Build. Build the Docker Image with the following command
+
+	    docker build -t catalog:latest .
+
+Verify docker image with
+
+        docker images
+
 ## Run Catalog : Java
 
 		cd <to project root folder>/target
@@ -102,7 +112,6 @@ Available configurables - shown below with default values.
 
 To run the docker-compose : For externalizing database into different containter, using their corresponding official dockerhub images.
 
-    docker-compose build
     docker-compose up or docker-compose -d (For deamonizing the processes)
 
 If -d was used, then after the containers startup, logs can be verified by the following command (the same command can be used in new terminal / command prompt window in case -d wasn't used)

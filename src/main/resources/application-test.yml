@@ -1,14 +1,6 @@
-POSTGRES_URL: jdbc:postgresql://localhost:5432/catalog
-POSTGRES_USER: catalog
-POSTGRES_PASSWORD: Catalog@1234
-
 spring:
   application:
     name: MY-Retail-Product-Catalog
-  datasource:
-    url: ${POSTGRES_URL}
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -59,5 +51,3 @@ server:
     eager-filter-init: true # Whether servlet filters should be initialized on startup.
     max-http-post-size: 0 # Maximum size, in bytes, of the HTTP post content.
     #worker-threads:  # Number of worker threads.
-
-DOCKER_BUILD_PHASE: N

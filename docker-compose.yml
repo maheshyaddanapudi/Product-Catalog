@@ -24,8 +24,6 @@ services:
           - postgres
   catalog:
     image: catalog:latest
-    build:
-      context: .
     links:
       - postgres
     depends_on:

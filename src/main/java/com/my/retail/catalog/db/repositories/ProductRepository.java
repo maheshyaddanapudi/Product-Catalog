@@ -8,9 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * main customer repository
- */
 @Repository
 @Transactional
 public interface ProductRepository extends CrudRepository<Product, Long> {

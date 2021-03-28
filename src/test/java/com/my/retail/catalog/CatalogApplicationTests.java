@@ -4,6 +4,7 @@ import com.my.retail.catalog.dto.response.product.PriceDTO;
 import com.my.retail.catalog.dto.response.product.ProductDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +24,9 @@ public class CatalogApplicationTests extends AbstractTest {
 	public void setUp() {
 		super.setUp();
 	}
+
 	@Test
+	@ConditionalOnProperty(value = "DOCKER_BUILD_PHASE", havingValue = "N", matchIfMissing = true)
 	public void CreateUpdateGetAndDeleteProduct() throws Exception {
 
 		String uri = "/products";
@@ -42,6 +45,16 @@ public class CatalogApplicationTests extends AbstractTest {
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 
+		mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
+		status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+
+		String content = mvcResult.getResponse().getContentAsString();
+		ProductDTO[] productlist = super.mapFromJson(content, ProductDTO[].class);
+		assertTrue(productlist.length > 0);
+
+		uri = "/products/13860428";
+
 		price.setValue(15.99);
 		price.setCurrency_code("USD");
 		product.setCurrent_price(price);
@@ -57,11 +70,6 @@ public class CatalogApplicationTests extends AbstractTest {
 		status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 
-		String content = mvcResult.getResponse().getContentAsString();
-		ProductDTO[] productlist = super.mapFromJson(content, ProductDTO[].class);
-		assertTrue(productlist.length > 0);
-
-		uri = "/products/13860428";
 		mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		status = mvcResult.getResponse().getStatus();
 

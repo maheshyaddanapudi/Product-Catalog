@@ -128,14 +128,14 @@ public class RestAPI {
                     content = @Content(schema = @Schema(implementation = BaseResponseDTO.class))) ,
             @ApiResponse(responseCode = "400", description = "Product ID Not Found", content = @Content()),
             @ApiResponse(responseCode = "500", description = "Internal Server Error - Returned when an unexpected error occurs on server side", content = @Content())})
-    @PutMapping(produces = "application/json", consumes = "application/json")
+    @PutMapping(value="/{id}", produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity<BaseResponseDTO> updateProduct(@Valid @RequestBody ProductDTO productDto) {
+    public ResponseEntity<BaseResponseDTO> updateProduct(@PathVariable long id, @Valid @RequestBody ProductDTO productDto) {
 
         BaseResponseDTO response = new BaseResponseDTO();
 
         try{
-            Product productFromDB = this.productService.findProductById(productDto.getId());
+            Product productFromDB = this.productService.findProductById(id);
             if(null!=productFromDB && productFromDB.getProduct_id()>0)
             {
                 this.productService.updateProduct(this.productMapper.mapDtoToProduct(productDto), productFromDB);

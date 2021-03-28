@@ -51,3 +51,5 @@ server:
     eager-filter-init: true # Whether servlet filters should be initialized on startup.
     max-http-post-size: 0 # Maximum size, in bytes, of the HTTP post content.
     #worker-threads:  # Number of worker threads.
+
+DOCKER_BUILD_PHASE: N

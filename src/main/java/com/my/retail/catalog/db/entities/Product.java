@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- */
 @Entity(name = "product")
 @Data
 @AllArgsConstructor
