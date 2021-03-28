@@ -71,7 +71,7 @@ The idea is to build a single production grade Spring Boot Jar with the followin
 		HTTP
 			a) http://localhost:8080/ - To access the Swagger pertaining to APIs for Product Catalog
 
-## Run Conductor Boot : Docker
+## Run Catalog Boot : Docker
 
 To run the container :
 
@@ -112,9 +112,8 @@ If -d was used, then after the containers startup, logs can be verified by the f
 Once all containers are started successfully, the "docker ps" output should look something similar to below.
 
     CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                   PORTS                                              NAMES
-    2cc0e92ebf50   conductor-boot:latest   "/bin/bash /appln/sc…"   23 minutes ago   Up 2 minutes (healthy)   0.0.0.0:8080->8080/tcp                             conductor-boot_conductor-boot_1
-    718dea9898f0   elasticsearch:5.6       "/docker-entrypoint.…"   54 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9200->9200/tcp, 0.0.0.0:9300->9300/tcp     conductor-boot_elasticsearch_1
-    a5f55ff9aacd   mysql:5.7               "docker-entrypoint.s…"   54 minutes ago   Up 2 minutes (healthy)   0.0.0.0:3306->3306/tcp, 0.0.0.0:33060->33060/tcp   conductor-boot_database_1
+    2cc0e92ebf50   catalog:latest          "/bin/bash /appln/sc…"   5 minutes ago    Up 2 minutes (healthy)   0.0.0.0:8080->8080/tcp                             catalog_catalog_1
+    718dea9898f0   postgres:latest         "/docker-entrypoint.…"   5 minutes ago    Up 3 minutes (healthy)   0.0.0.0:5432->5432/tcp                             catalog_postgres_1
 
 For mapping volumes i.e. having persistent container data, follow these steps.
 
