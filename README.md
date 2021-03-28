@@ -67,6 +67,11 @@ Verify docker image with
     The profiles included by default are
         - default (This includes embedded Postgres Database)
 
+    To use external persistence unit i.e. separate standalone Postgres, use below
+                java -Dspring.profiles.activepostgres -DPOSTGRES_URL=jdbc:postgresql://localhost:54131/catalog -DPOSTGRES_USER=catalog -DPOSTGRES_PASSWORD=catalog@1234 -jar catalog-0.0.1-SNAPSHOT.jar
+
+        - Pass the necessary environment variables i.e. DB connection details like url, username and password.
+
 ### Available Profiles
 
     1) default
