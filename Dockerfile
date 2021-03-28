@@ -8,7 +8,6 @@ ENV POSTGRES_USER catalog
 ENV POSTGRES_PASSWORD catalog@1234
 ENV SPRING_PROFILES_ACTIVE default
 ENV CATALOG_VERSION 0.0.1-SNAPSHOT
-ENV USER_TIMEZONE IST
 
 # Switching to root working  directory
 WORKDIR /
@@ -47,7 +46,6 @@ RUN echo "#!/bin/bash" > /appln/scripts/startup.sh \
   && echo "cd /appln/bin/catalog" >> /appln/scripts/startup.sh \
   && echo "java \
   -Dspring.profiles.active=\$SPRING_PROFILES_ACTIVE \
-  -Duser.timezone=\$USER_TIMEZONE \
   -DPOSTGRES_URL=\$POSTGRES_URL \
   -DPOSTGRES_USER=\$POSTGRES_USER \
   -DPOSTGRES_PASSWORD=\$POSTGRES_PASSWORD \
