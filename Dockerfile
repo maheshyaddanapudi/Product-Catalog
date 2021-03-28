@@ -40,7 +40,7 @@ RUN chown -R catalog:catalog /appln
 USER catalog
 
 # Moving the executable / build to the run location
-COPY target/catalog-0.0.1-SNAPSHOT.jar /appln/bin/catalog/catalog-0.0.1-SNAPSHOT.jar
+COPY target/catalog*.jar /appln/bin/catalog/
 
 # Creating the startup script, by passing the env variables to run the jar. Logs are written directly to continer logs.
 RUN echo "#!/bin/bash" > /appln/scripts/startup.sh \
