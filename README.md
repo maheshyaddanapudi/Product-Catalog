@@ -42,11 +42,11 @@ The idea is to build a single production grade Spring Boot Jar with the followin
 		
 	The maven build should place the catalog-${CATALOG_VERSION}.jar inside the target folder.
 
-## Run Conductor Boot : Java
+## Run Catalog : Java
 
 		cd <to project root folder>/target
 		
-	Below command will start the Conductor Boot Wrapper with Embedded MariaDB4J as Database and Embedded OAuth2 security as well as persistent Embedded Elasticsearch
+	Below command will start the Catalog with Embedded Postgres as Database
 		java -jar catalog-0.0.1-SNAPSHOT.jar
 
     The profiles included by default are
