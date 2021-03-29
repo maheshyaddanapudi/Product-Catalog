@@ -10,11 +10,13 @@
 
         docker-compose build 
 
+   This command might take 5-7 mins to build the image depending on the system configuration and network speed.
+
 2) Run the Containers
 
         docker-compose up -d
 
-This command might take a minute to fire up the containers.
+   This command might take a minute to fire up the containers.
 
 3) Verify Containers Health
 
