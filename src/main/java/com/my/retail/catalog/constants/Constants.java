@@ -3,6 +3,7 @@ package com.my.retail.catalog.constants;
 public class Constants {
 
     public static final String PROFILE_EXTERNAL_POSTGRES_DB = "postgres";
+    public static final String PROFILE_EXTERNAL_MONGO_DB = "mongodb";
 
     // General Constants
     public static final String NONE = "NONE";

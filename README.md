@@ -1,26 +1,24 @@
-# Spring Boot Product Catalog 
-## With Embedded Database(Postgres) 
-## With External Database(Postgres) support
+# Spring Boot Product Catalog
+## With Embedded Database(Mongo)
+## With External Database(Mongo) support
 ## With Docker and Docker Compose ready containerization
 
 ##### The README covers on the operational part of Catalog. For more details on the code level walkthrough / developer point of view, please contact developer.
 
 ##### Note
 
-      • Only Postgres is supported as external Database
+      • Only Mongo is supported as external Database
       
       				Or
       
-      • Embedded Postgres is supported, which is non-persistent and data is lost, thus eliminating the need for external for demo runs and unit tests.
+      • Embedded Mongo is supported, which is non-persistent and data is lost, thus eliminating the need for external for demo runs and unit tests.
 
 
 ## Overview
 
-The idea is to build a single production grade Spring Boot Jar with the following 
+The idea is to build a single production grade Spring Boot Jar with the following
 
       • Restful APIs for Product Catalog management - Create, Update, View, Delete Products.
-      
-      • Optional Embedded Non-Persistent Postgres
 
 ## Tech / Framework used
 
@@ -28,13 +26,14 @@ The idea is to build a single production grade Spring Boot Jar with the followin
 	  			
       --> Spring Boot - 2.2.4 Release
 			
-            • Postgres
+            • Mongo
             
             • JPA
             
             • OpenAPI Swagger UI
             
             • Logbook Splunk style HTTP logging
+
 ## Build using maven
 
 		cd <to project root folder>
@@ -56,25 +55,14 @@ Verify docker image with
 
 		cd <to project root folder>/target
 		
-	Below command will start the Catalog with Embedded Postgres as Database
-		java -jar catalog-0.0.1-SNAPSHOT.jar
-
-    The profiles included by default are
-        - default (This includes embedded Postgres Database)
-
-### Available Profiles
-
-    1) default
-        This profile holds the basic startup configuration needed for the Spring Boot Jar with embedded Postgres Database.
-
-    2) postgres
-        This profile configures the external Postgres database details.
-        Configurations available are as below. Shown are default values.
-            POSTGRES_URL=jdbc:postgresql://localhost:54131/catalog
-            POSTGRES_USER=catalog
-            POSTGRES_PASSWORD=catalog@1234
-
-    For more detailed properties, refer to application-{profile}.yml file as per the required profile properties.
+	Below command will start the Catalog, please pass the database connection details along (default values shown below)
+        java \
+      -DMONGODB_HOST=localhost \
+      -DMONGODB_PORT=27017 \
+      -DMONGODB_USERNAME=catalog \
+      -DMONGODB_PASSWORD=Catalog!234 \
+      -DMONGODB_DATABASE=catalog \
+      -jar catalog-0.0.1-SNAPSHOT.jar
 
 ## Application URLs
 
@@ -85,28 +73,15 @@ Verify docker image with
 
 To run the container :
 
-    docker run --name catalog -p 8080:8080 -d catalog:latest
-
-Few other examples / ways / configurations to run the container as:
-
-    1) Running with external Postgres - The database  is decoupled just leaving the core functionality.
-
-        docker run --name catalog -p 8080:8080 \
-            -e SPRING_PROFILES_ACTIVE=postgres \
-            -e POSTGRES_URL=jdbc:postgresql://localhost:54131/catalog \
-            -e POSTGRES_USER=catalog \
-            -e POSTGRES_PASSWORD=catalog@1234 \
+      docker run --name catalog -p 8080:8080 \
+            -e ENV MONGODB_HOST=localhost \
+            -e MONGODB_PORT=27017
+            -e MONGODB_USERNAME=root
+            -e MONGODB_PASSWORD=Root!234
+            -e MONGODB_DATABASE=catalog \
             -d catalog:latest
 
 #### All the below mentioned configurables / properties (under Available Profiles section) can be passed as Docker Container environment variables and will be set accordingly.
-
-Available configurables - shown below with default values.
-
-    POSTGRES_URL jdbc:postgresql://localhost:54131/catalog
-    POSTGRES_USER catalog
-    POSTGRES_PASSWORD catalog@1234
-    SPRING_PROFILES_ACTIVE default
-    USER_TIMEZONE IST
 
 ## Run Catalog : Docker Compose
 
@@ -122,12 +97,12 @@ Once all containers are started successfully, the "docker ps" output should look
 
     CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                   PORTS                                              NAMES
     2cc0e92ebf50   catalog:latest          "/bin/bash /appln/sc…"   5 minutes ago    Up 2 minutes (healthy)   0.0.0.0:8080->8080/tcp                             catalog_catalog_1
-    718dea9898f0   postgres:latest         "/docker-entrypoint.…"   5 minutes ago    Up 3 minutes (healthy)   0.0.0.0:5432->5432/tcp                             catalog_postgres_1
+    718dea9898f0   mongo:latest         "/docker-entrypoint.…"   5 minutes ago    Up 3 minutes (healthy)   0.0.0.0:27017->27017/tcp                             catalog_mongodb_1
 
 For mapping volumes i.e. having persistent container data, follow these steps.
 
     1) Create the following directories (These are custimizable to match docker-compose.yml volumes definitions)
 
-        container/persistence/postgres
+        container/persistence/mongo
 
-    2) Uncomment the volumes section under postgres
+    2) Uncomment the volumes section under Mongo

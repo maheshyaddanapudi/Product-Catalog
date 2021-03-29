@@ -1,14 +1,17 @@
 package com.my.retail.catalog.db.entities;
 
+import com.my.retail.catalog.constants.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "price")
+@Document(collection = "price")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,11 +24,8 @@ public class Price {
     private double value;
     private String currency_code;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "insert_timestamp", nullable = false)
     private Date insertTimestamp;
-
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "update_timestamp", nullable = false)
     private Date updateTimestamp;
 
     @PrePersist

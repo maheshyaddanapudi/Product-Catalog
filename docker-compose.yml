@@ -1,41 +1,36 @@
 version: '2.2'
 
 services:
-  postgres:
-    image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: catalog
-      POSTGRES_USER: catalog
-      POSTGRES_PASSWORD: Catalog@1234
-      LOGSPOUT: ignore
-    mem_limit: "512000000"
+  mongodb:
+    image: mongo:latest
     ports:
-      - 5432:5432
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
-      interval: 30s
-      timeout: 15s
-      retries: 10
+      - 27018:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Root!234
+      MONGO_INITDB_DATABASE: root-db
+    volumes:
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      #- mongodb_data:/data/db
     networks:
       catalog-nw:
         aliases:
-          - postgres
+          - mongodb
   catalog:
     image: catalog:latest
     build:
       context: .
     links:
-      - postgres
+      - mongodb
     depends_on:
-      postgres:
-        condition: service_healthy
+      mongodb:
+        condition: service_started
     environment:
-      SPRING_PROFILES_ACTIVE: postgres
-      POSTGRES_URL: jdbc:postgresql://postgres:5432/catalog
-      POSTGRES_USER: catalog
-      POSTGRES_PASSWORD: Catalog@1234
+      MONGODB_USERNAME: catalog
+      MONGODB_PASSWORD: Catalog!234
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+      MONGODB_DATABASE: catalog
       LOGSPOUT: ignore
     mem_limit: "512000000"
     ports:
@@ -49,13 +44,13 @@ services:
       catalog-nw:
         aliases:
           - catalog
-volumes:
-  postgres_data:
-    ## Use the below setting for a persistent data storage. Please craete the necessary container/persistence/postgres in your current directory of docker-compose.yml
+#volumes:
+  #mongodb_data:
+    ## Use the below setting for a persistent data storage. Please craete the necessary container/persistence/mongo in your current directory of docker-compose.yml
     #driver: local
     #driver_opts:
     #  type: none
-    #  device: $PWD/container/persistence/postgres
+    #  device: $PWD/container/persistence/mongo
     #  o: bind
 networks:
   catalog-nw:

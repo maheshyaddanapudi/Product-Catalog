@@ -36,7 +36,7 @@ public class ProductService {
 
     public boolean updateProduct(Product updatedProduct, Product productFromDB){
 
-        updatedProduct.setProduct_id(productFromDB.getProduct_id());
+        updatedProduct.setId(productFromDB.getId());
         updatedProduct.setInsertTimestamp(productFromDB.getInsertTimestamp());
         updatedProduct.setUpdateTimestamp(new Date());
         updatedProduct.getCurrent_price().setId(productFromDB.getCurrent_price().getId());

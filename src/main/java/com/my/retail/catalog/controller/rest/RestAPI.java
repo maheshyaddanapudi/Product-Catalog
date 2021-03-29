@@ -5,16 +5,17 @@ import com.my.retail.catalog.dto.response.base.BaseResponseDTO;
 import com.my.retail.catalog.dto.response.product.ProductDTO;
 import com.my.retail.catalog.mappers.ProductMapper;
 import com.my.retail.catalog.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +137,7 @@ public class RestAPI {
 
         try{
             Product productFromDB = this.productService.findProductById(id);
-            if(null!=productFromDB && productFromDB.getProduct_id()>0)
+            if(null!=productFromDB && productFromDB.getId()>0)
             {
                 this.productService.updateProduct(this.productMapper.mapDtoToProduct(productDto), productFromDB);
                 response.setMessage("Product Updated Successfully !!!");
@@ -175,7 +176,7 @@ public class RestAPI {
 
         try{
             Product productFromDB = this.productService.findProductById(id);
-            if(null!=productFromDB && productFromDB.getProduct_id()>0)
+            if(null!=productFromDB && productFromDB.getId()>0)
             {
                 this.productService.deleteProduct(productFromDB);
                 response.setMessage("Product Deleted Successfully !!!");

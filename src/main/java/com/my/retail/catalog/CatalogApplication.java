@@ -13,5 +13,4 @@ public class CatalogApplication {
 		SpringApplication application = new SpringApplication(CatalogApplication.class);
 		application.run(args);
 	}
-
 }

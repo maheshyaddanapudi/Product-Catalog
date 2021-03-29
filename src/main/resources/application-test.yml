@@ -2,14 +2,13 @@ spring:
   application:
     name: MY-Retail-Product-Catalog
   jpa:
+    database-platform: org.hibernate.ogm.datastore.mongodb.MongoDBDialect
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
-    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
-    database: POSTGRESQL
     show-sql: true
 
 logging:

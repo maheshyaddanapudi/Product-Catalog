@@ -1,15 +1,31 @@
+MONGODB_HOST: localhost
+MONGODB_PORT: 27017
+MONGODB_USERNAME: catalog
+MONGODB_PASSWORD: Catalog!234
+MONGODB_DATABASE: catalog
+
 spring:
   application:
     name: MY-Retail-Product-Catalog
+  data:
+    #mongodb:
+    #      authentication-database: admin
+    #      host: ${MONGODB_HOST}
+    #      port: ${MONGODB_PORT}
+    #      username: ${MONGODB_USERNAME}
+    #      password: ${MONGODB_PASSWORD}
+    #      database: ${MONGODB_DATABASE}
+    mongodb:
+      uri: mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}
+
   jpa:
+    database-platform: org.hibernate.ogm.datastore.mongodb.MongoDBDialect
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
-    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
-    database: POSTGRESQL
     show-sql: true
 
 logging:
@@ -51,5 +67,3 @@ server:
     eager-filter-init: true # Whether servlet filters should be initialized on startup.
     max-http-post-size: 0 # Maximum size, in bytes, of the HTTP post content.
     #worker-threads:  # Number of worker threads.
-
-DOCKER_BUILD_PHASE: N

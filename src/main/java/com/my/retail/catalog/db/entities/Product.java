@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "product")
+@Document(collection = "product")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,9 +17,6 @@ import java.util.Date;
 public class Product {
 
 	@Id
-	private long product_id;
-
-	@Column(unique = true, nullable = false)
 	private long id;
 
 	private String name;
@@ -26,11 +24,8 @@ public class Product {
 	@MapsId
 	private Price current_price;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "insert_timestamp", nullable = false)
 	private Date insertTimestamp;
-
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "update_timestamp", nullable = false)
 	private Date updateTimestamp;
 
 	@PrePersist
