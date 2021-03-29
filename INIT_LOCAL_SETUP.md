@@ -2,31 +2,23 @@
 
 ## Pre-Requisites
 
-1) Java 8
-2) Maven
-3) Docker
+1) Docker
 
 ## Environment Setup
 
-1) Build the JAR
-
-        mvn clean install
-        
-   The jar will be placed under target folder. Without this #2 will fail.
-
-2) Build the Catalog Docker Image
+1) Build the Catalog Docker Image
 
         docker-compose build 
 
    This command might take 5-7 mins to build the image depending on the system configuration and network speed.
 
-3) Run the Containers
+2) Run the Containers
 
         docker-compose up -d
 
    This command might take a minute to fire up the containers.
 
-4) Verify Containers Health
+3) Verify Containers Health
 
         docker ps
 

@@ -13,8 +13,7 @@
       
       • Embedded Mongo is supported, which is non-persistent and data is lost, thus eliminating the need for external for demo runs and unit tests.
 
-#### Instant local set-up - Refer to  <a href="https://github.com/maheshyaddanapudi/catalog/blob/main/INIT_LOCAL_SETUP.md" target="_blank">Local Environment SetUp</a>
-
+#### Instant local set-up - Refer to  <a href="https://github.com/maheshyaddanapudi/catalog/blob/develop/INIT_LOCAL_SETUP.md" target="_blank">Local Environment SetUp</a>
 
 ## Overview
 
@@ -114,7 +113,21 @@ For mapping volumes i.e. having persistent container data, follow these steps.
 
 Open http://localhost:8080 in browser (Preferably Chrome)
 
-1) Post new Product Pricing Request
+1) Get Product Details 
+
+          Request
+                ID : 13860428
+    
+          Response
+              {
+                  "id": 13860428,
+                  "name": "The Big Lebowski (Blu-ray)",
+                  "current_price": null
+              }
+   
+   Notice the name returned is from RedSky API Response "The Big Lebowski (Blu-ray)" and price is null as there is no price persisted yet, which will be done in #2 and reverified in #4 below.
+
+2) Post new Product Pricing Request
         
             {
                 "id": 13860428,
@@ -124,7 +137,7 @@ Open http://localhost:8080 in browser (Preferably Chrome)
                 "currency_code": "USD
             }
 
-2) Post new Product Pricing Request
+3) Post new Product Pricing Request
 
             {
                 "id": 123456,
@@ -135,7 +148,7 @@ Open http://localhost:8080 in browser (Preferably Chrome)
                 }
             }
 
-3) Get Product Details 
+4) Get Product Details 
 
           Request
                 ID : 13860428
@@ -152,10 +165,10 @@ Open http://localhost:8080 in browser (Preferably Chrome)
    
    Notice the name returned is from RedSky API Response "The Big Lebowski (Blu-ray)" and not from database "Placeholder Name - from Database"
 
-4) Get Product Details
+5) Get Product Details
 
        Request
-            ID : 13860429
+            ID : 123456
     
        Response
             {

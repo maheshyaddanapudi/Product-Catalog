@@ -83,7 +83,7 @@ public class RestAPI {
                     });
                 }
             } catch (JsonProcessingException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
 
             String productName = null!=tempResp ? getProductName(tempResp, id) : null;
@@ -101,13 +101,38 @@ public class RestAPI {
                 if(productName!=null) {
                     ProductDTO product = new ProductDTO();
                     product.setName(productName);
+                    product.setId(id);
                     return new ResponseEntity(product, HttpStatus.OK);
                 }
-                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                else{
+                    return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                }
             }
         }
         catch(IllegalStateException ise){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, Object> tempResp = null;
+            try {
+                String redskyResponse = this.restService.getProductFromRedsky(String.valueOf(id));
+                if(null!=redskyResponse){
+                    tempResp = (Map<String, Object>) mapper.readValue(redskyResponse, new TypeReference<Object>() {
+                    });
+                }
+            } catch (JsonProcessingException e) {
+                //e.printStackTrace();
+            }
+
+            String productName = null!=tempResp ? getProductName(tempResp, id) : null;
+
+            if(productName!=null) {
+                ProductDTO product = new ProductDTO();
+                product.setName(productName);
+                product.setId(id);
+                return new ResponseEntity(product, HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
         }
         catch(Exception e){
             e.printStackTrace();
