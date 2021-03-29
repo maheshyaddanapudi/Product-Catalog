@@ -13,7 +13,7 @@
       
       • Embedded Mongo is supported, which is non-persistent and data is lost, thus eliminating the need for external for demo runs and unit tests.
 
-#### Instant local set-up - Refer to  <a href="https://github.com/maheshyaddanapudi/catalog/blob/develop/INIT_LOCAL_SETUP.md" target="_blank">Local Environment SetUp</a>
+#### Instant local set-up - Refer to  <a href="https://github.com/maheshyaddanapudi/catalog/blob/main/INIT_LOCAL_SETUP.md" target="_blank">Local Environment SetUp</a>
 
 ## Overview
 
