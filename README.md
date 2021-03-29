@@ -106,3 +106,63 @@ For mapping volumes i.e. having persistent container data, follow these steps.
         container/persistence/mongo
 
     2) Uncomment the volumes section under Mongo
+
+
+## Test Case - 1
+
+Open http://localhost:8080 in browser (Preferably Chrome)
+
+1) Post new Product Pricing Request
+        
+            {
+                "id": 13860428,
+                "name": "Placeholder Name - from Database",
+                "current_price": {
+                "value": 13.49,
+                "currency_code": "USD
+            }
+
+2) Post new Product Pricing Request
+
+            {
+                "id": 123456,
+                "name": "RedSky Non existant - from Database",
+                "current_price": {
+                "value": 33.49,
+                "currency_code": "USD
+                }
+            }
+
+3) Get Product Details 
+
+          Request
+                ID : 13860428
+    
+          Response
+              {
+                  "id": 13860428,
+                  "name": "The Big Lebowski (Blu-ray)",
+                  "current_price": {
+                  "value": 13.49,
+                  "currency_code": "USD"
+                  }
+              }
+   
+   Notice the name returned is from RedSky API Response "The Big Lebowski (Blu-ray)" and not from database "Placeholder Name - from Database"
+
+4) Get Product Details
+
+       Request
+            ID : 13860429
+    
+       Response
+            {
+                "id": 123456,
+                "name": "RedSky Non existant - from Database",
+                "current_price": {
+                "value": 33.49,
+                "currency_code": "USD
+                }
+            }
+
+   Notice the name returned is NOT from RedSky API Response as its not found on RedSky and from database "RedSky Non existant - from Database"

@@ -77,13 +77,16 @@ public class RestAPI {
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> tempResp = null;
             try {
-                tempResp = (Map<String, Object>) mapper.readValue(this.restService.getProductFromRedsky(String.valueOf(id)), new TypeReference<Object>() {
-                });
+                String redskyResponse = this.restService.getProductFromRedsky(String.valueOf(id));
+                if(null!=redskyResponse){
+                    tempResp = (Map<String, Object>) mapper.readValue(redskyResponse, new TypeReference<Object>() {
+                    });
+                }
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
 
-            String productName = getProductName(tempResp, id);
+            String productName = null!=tempResp ? getProductName(tempResp, id) : null;
 
             if(null!=this.productService.findProductById(id))
             {
