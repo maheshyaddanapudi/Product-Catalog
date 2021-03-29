@@ -1,10 +1,14 @@
 package com.my.retail.catalog.controller.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.my.retail.catalog.db.entities.Product;
 import com.my.retail.catalog.dto.response.base.BaseResponseDTO;
 import com.my.retail.catalog.dto.response.product.ProductDTO;
 import com.my.retail.catalog.mappers.ProductMapper;
 import com.my.retail.catalog.service.ProductService;
+import com.my.retail.catalog.service.RestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -27,14 +32,12 @@ import java.util.List;
 @Tag(name = "Product Catalog Controller", description = "The API provides the interface for adding / removing or updating products to database.")
 public class RestAPI {
 
-    private final ProductService productService;
-    private final ProductMapper productMapper;
-
     @Autowired
-    public RestAPI(ProductService productService, ProductMapper productMapper) {
-        this.productService = productService;
-        this.productMapper = productMapper;
-    }
+    private ProductService productService;
+    @Autowired
+    private ProductMapper productMapper;
+    @Autowired
+    private RestService restService;
 
     @GetMapping(produces = "application/json")
     @Operation(summary = "Provides Product Info", description = "Returns JSON formatted Product Info", tags = { "product" })
@@ -71,13 +74,32 @@ public class RestAPI {
     public ResponseEntity<ProductDTO> getProductById(@PathVariable long id) {
 
         try{
-            System.out.println("getProductById --> "+id);
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, Object> tempResp = null;
+            try {
+                tempResp = (Map<String, Object>) mapper.readValue(this.restService.getProductFromRedsky(String.valueOf(id)), new TypeReference<Object>() {
+                });
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+            String productName = getProductName(tempResp, id);
+
             if(null!=this.productService.findProductById(id))
             {
-                return new ResponseEntity(this.productMapper.mapProductToDto(this.productService.findProductById(id)), HttpStatus.OK);
+                ProductDTO product = this.productMapper.mapProductToDto(this.productService.findProductById(id));
+
+                if(productName!=null)
+                    product.setName(productName);
+                return new ResponseEntity(product, HttpStatus.OK);
             }
             else
             {
+                if(productName!=null) {
+                    ProductDTO product = new ProductDTO();
+                    product.setName(productName);
+                    return new ResponseEntity(product, HttpStatus.OK);
+                }
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
         }
@@ -199,5 +221,26 @@ public class RestAPI {
             response.setStatus(false);
             return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    private String getProductName(Map<String, Object> tempResp, Long productId) {
+        Map<String,Object> product = (Map<String, Object>) tempResp.get("product");
+        if (product.isEmpty()){
+            return null;
+        }
+        Map<String,Object> item = (Map<String, Object>) product.get("item");
+        if (item.isEmpty()){
+            return null;
+        }
+        Map<String,Object> description = (Map<String, Object>) item.get("product_description");
+        if (description.isEmpty()){
+            return null;
+        }
+        String name = (String) description.get("title");
+        if(name.isEmpty()){
+            return null;
+        }
+        return name;
     }
 }

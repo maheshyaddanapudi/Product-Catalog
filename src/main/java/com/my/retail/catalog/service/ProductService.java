@@ -1,14 +1,18 @@
 package com.my.retail.catalog.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.my.retail.catalog.db.entities.Price;
 import com.my.retail.catalog.db.entities.Product;
 import com.my.retail.catalog.db.repositories.PriceRepository;
 import com.my.retail.catalog.db.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -23,6 +27,7 @@ public class ProductService {
         return this.productRepository.findAll();
     }
     public Product findProductById(long id){
+
         return this.productRepository.findProductById(id).orElseThrow(() -> new IllegalStateException("The product doesn't exist !!!"));
     }
 
@@ -61,4 +66,5 @@ public class ProductService {
         this.priceRepository.delete(priceToDelete);
 
     }
+
 }
