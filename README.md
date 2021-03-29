@@ -124,7 +124,7 @@ Open http://localhost:8080 in browser (Preferably Chrome)
                   "current_price": null
               }
    
-   Notice the name returned is from RedSky API Response "The Big Lebowski (Blu-ray)" and price is null as there is no price persisted yet, which will be done in #2
+   Notice the name returned is from RedSky API Response "The Big Lebowski (Blu-ray)" and price is null as there is no price persisted yet, which will be done in #2 and reverified in #4 below.
 
 2) Post new Product Pricing Request
         
