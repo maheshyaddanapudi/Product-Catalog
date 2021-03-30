@@ -73,7 +73,7 @@ Docker Image published to <a href="https://hub.docker.com/repository/docker/zzzm
 
 ### Build Docker Image
 
-After Maven Build. Build the Docker Image with the following command
+Build the Docker Image with the following command
 
 	    docker build -t catalog:latest .
 
