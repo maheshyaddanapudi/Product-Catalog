@@ -1,7 +1,16 @@
 # Spring Boot Product Pricing Catalog
-## With Embedded Database(Mongo)
-## With External Database(Mongo) support
+## With Embedded Database(Mongo) - For JUnits
+## With External Database(Mongo) - For Runtime
 ## With Docker and Docker Compose ready containerization
+
+### Backbone of the requirement / idea behind this project is to expose a single Catalog API, which further interacts with 2 downstream systems (RedSky API & NoSQL Databse) to consolidate the product metadata & price.
+
+						    <--Downstream API Call--> RedSky
+						    |  (Get Product Metadata)
+		User <--Catalog API--> Catalog JAR --
+						    |  (Get Product Price)
+						    <--Database Call--> MongoDB
+
 
 ##### The README covers on the operational part of Catalog. For more details on the code level walkthrough / developer point of view, please contact developer.
 
