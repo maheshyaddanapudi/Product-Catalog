@@ -7,3 +7,7 @@ workflows:
   maven_test:
     jobs:
       - maven/test
+
+machine:
+    java:
+        version: oraclejdk8
