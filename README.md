@@ -51,6 +51,7 @@ The idea is to build a single production grade Spring Boot Jar with the followin
 
 | CI Provider | Status          |
 | ------- | ------------------ |
+| Circle CI   | [![maheshyaddanapudi](https://circleci.com/gh/maheshyaddanapudi/Product-Catalog.svg?style=shield&circle-token=5975bca8ed931be03ca5e0a49166ed7d6cfd1059)](https://circleci.com/gh/maheshyaddanapudi/Product-Catalog) |
 | Java CI   | ![Java CI with Maven](https://github.com/maheshyaddanapudi/Product-Catalog/workflows/Java%20CI%20with%20Maven/badge.svg?branch=main) |
 | Travis CI   | [![Build Status](https://travis-ci.com/maheshyaddanapudi/Product-Catalog.svg?token=wbn4Yqb2qi2XtDsYgKMF&branch=main)](https://travis-ci.com/maheshyaddanapudi/Product-Catalog) |
 
