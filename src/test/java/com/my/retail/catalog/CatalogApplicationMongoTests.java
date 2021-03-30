@@ -75,6 +75,6 @@ public class CatalogApplicationMongoTests extends AbstractTest {
 
 		mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
 		status = mvcResult.getResponse().getStatus();
-		assertEquals(400, status);
+		assertEquals(200, status);
 	}
 }
