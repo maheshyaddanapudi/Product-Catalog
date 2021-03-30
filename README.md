@@ -47,6 +47,20 @@ The idea is to build a single production grade Spring Boot Jar with the followin
             
             • Logbook Splunk style HTTP logging
 
+## Build CI (Continuous Integration)
+
+| CI Provider | Status          |
+| ------- | ------------------ |
+| Java CI   | ![Java CI with Maven](https://github.com/maheshyaddanapudi/Product-Catalog/workflows/Java%20CI%20with%20Maven/badge.svg?branch=main) |
+| Travis CI   | [![Build Status](https://travis-ci.com/maheshyaddanapudi/Product-Catalog.svg?branch=main)](https://travis-ci.com/maheshyaddanapudi/Product-Catalog) |
+
+## Containerization CI (Continuous Integration)
+
+| CI Provider | Status          |
+| ------- | ------------------ |
+| Docker   | ![Docker](https://github.com/maheshyaddanapudi/Product-Catalog/workflows/Docker/badge.svg?branch=main) |
+| Docker Image CI   | ![Docker Image CI](https://github.com/maheshyaddanapudi/Product-Catalog/workflows/Docker%20Image%20CI/badge.svg?branch=main) |
+
 ## Build using maven
 
 		cd <to project root folder>
