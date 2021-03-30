@@ -10,4 +10,4 @@ workflows:
 
 machine:
     java:
-        version: oraclejdk8
+        version: 'oraclejdk8'
