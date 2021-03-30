@@ -1,4 +1,4 @@
-# Spring Boot Product Catalog
+# Spring Boot Product Pricing Catalog
 ## With Embedded Database(Mongo)
 ## With External Database(Mongo) support
 ## With Docker and Docker Compose ready containerization
@@ -19,7 +19,10 @@
 
 The idea is to build a single production grade Spring Boot Jar with the following
 
-      • Restful APIs for Product Catalog management - Create, Update, View, Delete Products.
+      • Restful APIs for Product Pricing Catalog management - Create, Update, View, Delete Products.
+	      • While returning the View Product Details - The Product name is taken from a downstream API call to RedSky
+	      • While returning the View Product Details - The Product price is taken from NoSQL Database (Mongo)
+	      Thus combining the data from two sources and responding to API call.
 
 ## Tech / Framework used
 
