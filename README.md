@@ -62,6 +62,8 @@ The idea is to build a single production grade Spring Boot Jar with the followin
 | Docker   | ![Docker](https://github.com/maheshyaddanapudi/Product-Catalog/workflows/Docker/badge.svg?branch=main) |
 | Docker Image CI   | ![Docker Image CI](https://github.com/maheshyaddanapudi/Product-Catalog/workflows/Docker%20Image%20CI/badge.svg?branch=main) |
 
+Docker Image published to <a href="https://hub.docker.com/repository/docker/zzzmahesh/my-retail-product-catalog" target="_blank">DockerHub here</a>
+
 ## Build using maven
 
 		cd <to project root folder>
